@@ -6,20 +6,22 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/Andreas-Evripidou/AoC-2024/2024/utils"
+	"github.com/Andreas-Evripidou/AoC-2024/utils"
 )
 
 func main() {
 	input := utils.ReadInput("input.txt")
-	testInput := utils.ReadInput("testInput.txt")
 	fmt.Println("Day 01 input:", input)
 
+	if input == "" {
+		fmt.Print("Please update the input.txt\n")
+		os.Exit(1)
+	}
+
 	// Part 1
-	fmt.Println("Validate Part 1:", solvePart1(testInput))
 	fmt.Println("Part 1:", solvePart1(input))
 
 	// Part 2
-	fmt.Println("Validate Part 2:", solvePart2(testInput))
 	fmt.Println("Part 2:", solvePart2(input))
 }
 
