@@ -1,17 +1,25 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"os"
 	"path/filepath"
 )
 
 func main() {
-	rootDir := "AOC-2024"
-	utilsDir := filepath.Join(rootDir, "utils")
+	rootDir := flag.String("year", "", "Root directory for the Advent of Code structure")
+	flag.Parse()
+
+	if *rootDir == "" {
+		fmt.Println("Error: The -year flag is required. Please specify the year in order to create a year directory.")
+		os.Exit(1)
+	}
+
+	utilsDir := filepath.Join(*rootDir, "utils")
 	numDays := 25
 
-	err := createRootDirectory(rootDir)
+	err := createRootDirectory(*rootDir)
 	if err != nil {
 		fmt.Printf("Failed to create root directory: %v\n", err)
 		return
@@ -25,7 +33,6 @@ func main() {
 	}
 	fmt.Println("Created utils directory:", utilsDir)
 
-	// Create files in utils
 	err = createUtilFiles(utilsDir)
 	if err != nil {
 		fmt.Printf("Failed to create utils.go: %v\n", err)
@@ -33,10 +40,7 @@ func main() {
 	}
 	fmt.Println("Created utils.go file in utils directory")
 
-	// Create directories for each day
-	// Create main.go
-	// Create input.txt
-	createChallengesDict(numDays, rootDir)
+	createChallengesDict(numDays, *rootDir)
 }
 
 func createChallengesDict(numDays int, rootDir string) {
