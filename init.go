@@ -53,7 +53,7 @@ func createChallengesDict(numDays int, rootDir string) {
 
 import (
 	"fmt"
-	"AOC-2024/utils"
+	"../utils"
 )
 
 func main() {
