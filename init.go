@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 func main() {
@@ -16,7 +17,6 @@ func main() {
 		os.Exit(1)
 	}
 
-	utilsDir := filepath.Join(*rootDir, "utils")
 	numDays := 25
 
 	err := createRootDirectory(*rootDir)
@@ -25,20 +25,6 @@ func main() {
 		return
 	}
 	fmt.Println("Created root directory:", rootDir)
-
-	err = createUtilsFolder(utilsDir)
-	if err != nil {
-		fmt.Printf("Failed to create utils directory: %v\n", err)
-		return
-	}
-	fmt.Println("Created utils directory:", utilsDir)
-
-	err = createUtilFiles(utilsDir)
-	if err != nil {
-		fmt.Printf("Failed to create utils.go: %v\n", err)
-		return
-	}
-	fmt.Println("Created utils.go file in utils directory")
 
 	createChallengesDict(numDays, *rootDir)
 }
@@ -53,35 +39,18 @@ func createChallengesDict(numDays int, rootDir string) {
 		}
 
 		mainFile := filepath.Join(dayDir, "main.go")
-		mainContent := fmt.Sprintf(`package main
-
-import (
-	"fmt"
-	"../utils"
-)
-
-func main() {
-	input := utils.ReadInput("input.txt")
-	fmt.Println("Day %02d input:", input)
-
-	// Part 1
-	fmt.Println("Part 1:", solvePart1(input))
-
-	// Part 2
-	fmt.Println("Part 2:", solvePart2(input))
-}
-
-func solvePart1(input string) string {
-	// TODO: Implement Part 1
-	return "Not implemented"
-}
-
-func solvePart2(input string) string {
-	// TODO: Implement Part 2
-	return "Not implemented"
-}
-`, day)
+		mainTemplate := readInput("initFiles/main.go")
+		mainContent := fmt.Sprintf(mainTemplate, day)
 		err = os.WriteFile(mainFile, []byte(mainContent), 0644)
+		if err != nil {
+			fmt.Printf("Failed to create main.go for day %02d: %v\n", day, err)
+			continue
+		}
+
+		mainTestFile := filepath.Join(dayDir, "main_test.go")
+		mainTestTemplate := readInput("initFiles/main_Test.go")
+		mainTestContent := fmt.Sprintf(mainTestTemplate, day)
+		err = os.WriteFile(mainTestFile, []byte(mainTestContent), 0644)
 		if err != nil {
 			fmt.Printf("Failed to create main.go for day %02d: %v\n", day, err)
 			continue
@@ -94,39 +63,15 @@ func solvePart2(input string) string {
 			continue
 		}
 
+		testInputFile := filepath.Join(dayDir, "testInput.txt")
+		err = os.WriteFile(testInputFile, []byte{}, 0644)
+		if err != nil {
+			fmt.Printf("Failed to create testInput.txt for day %02d: %v\n", day, err)
+			continue
+		}
+
 		fmt.Printf("Created structure for day %02d\n", day)
 	}
-}
-
-func createUtilFiles(utilsDir string) error {
-	utilsFile := filepath.Join(utilsDir, "utils.go")
-	err := os.WriteFile(utilsFile, []byte(`package utils
-
-import (
-	"log"
-	"os"
-	"strings"
-)
-
-// ReadInput reads the content of a file and returns it as a string
-func ReadInput(filePath string) string {
-	data, err := os.ReadFile(filePath)
-	if err != nil {
-		log.Fatalf("Failed to read file: %v", err)
-	}
-	return strings.TrimSpace(string(data))
-}
-`), 0644)
-	return err
-}
-
-func createUtilsFolder(utilsDir string) error {
-	err := os.Mkdir(utilsDir, 0755)
-	if os.IsExist(err) {
-
-		return nil
-	}
-	return err
 }
 
 func createRootDirectory(rootDir string) error {
@@ -135,4 +80,12 @@ func createRootDirectory(rootDir string) error {
 		return nil
 	}
 	return err
+}
+
+func readInput(filePath string) string {
+	data, err := os.ReadFile(filePath)
+	if err != nil {
+		fmt.Printf("Failed to read file: %v", err)
+	}
+	return strings.TrimSpace(string(data))
 }

@@ -7,6 +7,8 @@ import (
 	"strings"
 )
 
+var year = "2024"
+
 // ReadInput reads the content of a file and returns it as a string
 func ReadInput(filePath string) string {
 	data, err := os.ReadFile(filePath)

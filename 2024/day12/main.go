@@ -2,12 +2,19 @@ package main
 
 import (
 	"fmt"
-	"../utils"
+	"os"
+
+	"github.com/Andreas-Evripidou/AoC-2024/utils"
 )
 
 func main() {
 	input := utils.ReadInput("input.txt")
 	fmt.Println("Day 12 input:", input)
+
+	if input == "" {
+		fmt.Print("Please update the input.txt\n")
+		os.Exit(1)
+	}
 
 	// Part 1
 	fmt.Println("Part 1:", solvePart1(input))
