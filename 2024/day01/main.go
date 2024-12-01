@@ -6,7 +6,7 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/Andreas-Evripidou/AoC-2024/utils"
+	"github.com/Andreas-Evripidou/advent-of-code/utils"
 )
 
 func main() {

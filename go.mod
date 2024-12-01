@@ -1,4 +1,4 @@
-module github.com/Andreas-Evripidou/AoC-2024
+module github.com/Andreas-Evripidou/advent-of-code
 
 go 1.23.1
 
