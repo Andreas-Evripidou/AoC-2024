@@ -18,6 +18,23 @@ func ReadInput(filePath string) string {
 	return strings.TrimSpace(string(data))
 }
 
+func ParseListOfListOfInts(input string, stringBetweenLines string) [][]int {
+	lines := parseLines(input)
+
+	mainList := make([][]int, 0)
+	for _, line := range lines {
+		splitLine := strings.Split(line, stringBetweenLines)
+		subList := make([]int, 0)
+		for _, splitSubLine := range splitLine {
+			intSplitLine, _ := strconv.Atoi(splitSubLine)
+			subList = append(subList, intSplitLine)
+		}
+		mainList = append(mainList, subList)
+	}
+
+	return mainList
+}
+
 func ParsTwoCountMaps(input string, stringBetweenLines string) (map[string]int, map[string]int) {
 	lines := parseLines(input)
 
