@@ -17,11 +17,11 @@ var solutionPart2 = ""
 func init() {
 	readBytes, err := os.ReadFile(testInputFile)
 	if err != nil {
-		fmt.Printf("Failed to read [%!s(int=21)] with error [%!s(MISSING)]", testInputFile, err)
+		fmt.Printf("Failed to read %s with error %s", testInputFile, err)
 	}
 
 	if string(readBytes) == "" {
-		fmt.Printf("Please update the [%!s(MISSING)] file", testInputFile)
+		fmt.Printf("Please update the %s file", testInputFile)
 		os.Exit(1)
 	}
 
