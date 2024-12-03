@@ -3,6 +3,9 @@ package main
 import (
 	"fmt"
 	"os"
+	"regexp"
+	"strconv"
+	"strings"
 
 	"github.com/Andreas-Evripidou/advent-of-code/utils"
 )
@@ -24,11 +27,30 @@ func main() {
 }
 
 func solvePart1(input string) string {
-	// TODO: Implement Part 1
-	return "Not implemented"
+	sum := 0
+	r, _ := regexp.Compile(`mul\(([0-9]+),([0-9]+)\)`)
+	multiplicationList := r.FindAllStringSubmatch(input, -1)
+
+	for _, multiplication := range multiplicationList {
+		sum += utils.StringToInt(multiplication[1]) * utils.StringToInt(multiplication[2])
+	}
+
+	return strconv.Itoa(sum)
 }
 
 func solvePart2(input string) string {
-	// TODO: Implement Part 2
-	return "Not implemented"
+	sanitizedInput := ""
+	for _, line := range strings.Split(input, "do()") {
+		sanitizedInput += strings.Split(line, "don't()")[0]
+	}
+
+	sum := 0
+	r, _ := regexp.Compile(`mul\(([0-9]+),([0-9]+)\)`)
+	multiplicationList := r.FindAllStringSubmatch(sanitizedInput, -1)
+
+	for _, multiplication := range multiplicationList {
+		sum += utils.StringToInt(multiplication[1]) * utils.StringToInt(multiplication[2])
+	}
+
+	return strconv.Itoa(sum)
 }
