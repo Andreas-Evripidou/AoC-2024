@@ -24,21 +24,21 @@ After running the script, the following structure will be created:
 
 ```graphql
 2024/                  # Root directory for the year
-├── go.mod             # Go module file
-├── utils/             # Directory for utility functions
-│   └── utils.go       # Utility functions for the challenge
 ├── day01/             # Directory for Day 1 challenge
 │   ├── main.go        # Solution file for Day 1
 │   ├── main_test.go   # Tests for Day 1 solution
-│   └── input.txt      # Input file for Day 1
+│   ├── input.txt      # Input file for Day 1
+│   └── testInput.txt  # Test input file for Day 1
 ├── day02/             # Directory for Day 2 challenge
 │   ├── main.go        # Solution file for Day 2
 │   ├── main_test.go   # Tests for Day 2 solution
-│   └── input.txt      # Input file for Day 2
+│   ├── input.txt      # Input file for Day 2
+│   └── testInput.txt  # Test input file for Day 2
 ...
 └── day25/             # Directory for Day 25 challenge
     ├── main.go        # Solution file for Day 25
     ├── main_test.go   # Tests for Day 25 solution
-    └── input.txt      # Input file for Day 25
+    ├── input.txt      # Input file for Day 25
+    └── testInput.txt  # Test input file for Day 25
 
 ```
