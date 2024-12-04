@@ -61,12 +61,12 @@ func solvePart2(input string) string {
 	rowsLength := len(stringGrid)
 	for i := range columnsLength - 2 {
 		for j := range rowsLength - 2 {
-			middle := stringGrid[j+1][i+1]
+			middle := stringGrid[i+1][j+1]
 			if middle != "A" {
 				continue
 			}
-			diagonal1 := stringGrid[j][i] + middle + stringGrid[j+2][i+2]
-			diagonal2 := stringGrid[j+2][i] + middle + stringGrid[j][i+2]
+			diagonal1 := stringGrid[i][j] + middle + stringGrid[i+2][j+2]
+			diagonal2 := stringGrid[i+2][j] + middle + stringGrid[i][j+2]
 
 			if (diagonal1 == "MAS" || diagonal1 == "SAM") && (diagonal2 == "MAS" || diagonal2 == "SAM") {
 				occurrences++
