@@ -35,6 +35,21 @@ func ParseListOfListOfInts(input string, stringBetweenLines string) [][]int {
 	return mainList
 }
 
+func ParseListOfListOfString(input string) [][]string {
+	lines := parseLines(input)
+
+	mainList := make([][]string, 0)
+	for _, line := range lines {
+		subList := make([]string, 0)
+		for _, character := range line {
+			subList = append(subList, string(character))
+		}
+		mainList = append(mainList, subList)
+	}
+
+	return mainList
+}
+
 func ParsTwoCountMaps(input string, stringBetweenLines string) (map[string]int, map[string]int) {
 	lines := parseLines(input)
 

@@ -11,8 +11,8 @@ import (
 var testInputFile = "testInput.txt"
 var testInput string
 
-var solutionPart1 = ""
-var solutionPart2 = ""
+var solutionPart1 = "18"
+var solutionPart2 = "9"
 
 func init() {
 	readBytes, err := os.ReadFile(testInputFile)
