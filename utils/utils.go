@@ -18,6 +18,11 @@ func ReadInput(filePath string) string {
 	return strings.TrimSpace(string(data))
 }
 
+func ParseTwoPartInput(input string, stringBetweenParts string) (part1 string, part2 string) {
+	parts := strings.Split(input, stringBetweenParts)
+	return parts[0], parts[1]
+}
+
 func ParseListOfListOfInts(input string, stringBetweenLines string) [][]int {
 	lines := parseLines(input)
 
