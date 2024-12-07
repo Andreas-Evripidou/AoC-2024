@@ -24,7 +24,7 @@ func ParseTwoPartInput(input string, stringBetweenParts string) (part1 string, p
 }
 
 func ParseListOfListOfInts(input string, stringBetweenLines string) [][]int {
-	lines := parseLines(input)
+	lines := ParseLines(input)
 
 	mainList := make([][]int, 0)
 	for _, line := range lines {
@@ -41,7 +41,7 @@ func ParseListOfListOfInts(input string, stringBetweenLines string) [][]int {
 }
 
 func ParseListOfListOfString(input string) [][]string {
-	lines := parseLines(input)
+	lines := ParseLines(input)
 
 	mainList := make([][]string, 0)
 	for _, line := range lines {
@@ -56,7 +56,7 @@ func ParseListOfListOfString(input string) [][]string {
 }
 
 func ParsTwoCountMaps(input string, stringBetweenLines string) (map[string]int, map[string]int) {
-	lines := parseLines(input)
+	lines := ParseLines(input)
 
 	var map1 = make(map[string]int)
 	var map2 = make(map[string]int)
@@ -72,7 +72,7 @@ func ParsTwoCountMaps(input string, stringBetweenLines string) (map[string]int, 
 }
 
 func ParseTwoNumberLists(input string, stringBetweenLines string) ([]int, []int) {
-	lines := parseLines(input)
+	lines := ParseLines(input)
 	fileLength := len(lines)
 
 	list1 := make([]int, fileLength)
@@ -85,7 +85,7 @@ func ParseTwoNumberLists(input string, stringBetweenLines string) ([]int, []int)
 	return list1, list2
 }
 
-func parseLines(input string) []string {
+func ParseLines(input string) []string {
 	return strings.Split(strings.TrimSpace(input), "\n")
 }
 
@@ -99,4 +99,11 @@ func GetIntAbsoluteValue(num int) int {
 func StringToInt(s string) int {
 	num, _ := strconv.Atoi(s)
 	return num
+}
+
+//------------------ Map related -----------------------\\
+
+type Point struct {
+	X int
+	Y int
 }
