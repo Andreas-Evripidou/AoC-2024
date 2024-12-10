@@ -31,6 +31,9 @@ func ParseListOfListOfInts(input string, stringBetweenLines string) [][]int {
 		splitLine := strings.Split(line, stringBetweenLines)
 		subList := make([]int, 0)
 		for _, splitSubLine := range splitLine {
+			if splitSubLine == "." {
+				splitSubLine = "-1"
+			}
 			intSplitLine, _ := strconv.Atoi(splitSubLine)
 			subList = append(subList, intSplitLine)
 		}
