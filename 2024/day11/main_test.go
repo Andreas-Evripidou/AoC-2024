@@ -11,7 +11,7 @@ import (
 var testInputFile = "testInput.txt"
 var testInput string
 
-var solutionPart1 = ""
+var solutionPart1 = "55312"
 var solutionPart2 = ""
 
 func init() {
@@ -36,4 +36,33 @@ func TestSolvePart1(t *testing.T) {
 func TestSolvePart2(t *testing.T) {
 	assert.NotEmpty(t, solutionPart2, "Please provide the test solution for part 2")
 	assert.Equal(t, solutionPart2, solvePart2(testInput))
+}
+
+func Test_splitStone(t *testing.T) {
+	tests := []struct {
+		name        string
+		stringStone string
+		want        []int
+	}{
+		{
+			name:        "Test 1",
+			stringStone: "12",
+			want:        []int{1, 2},
+		},
+		{
+			name:        "Test 2",
+			stringStone: "1234",
+			want:        []int{12, 34},
+		},
+		{
+			name:        "Test 5",
+			stringStone: "123456",
+			want:        []int{123, 456},
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			assert.Equal(t, tt.want, splitStone(tt.stringStone))
+		})
+	}
 }
